@@ -1,11 +1,12 @@
 # Adiabatic flame temperature (AFT) calculator - flametemp()
 ### What is it?
 The temperature resulting from the combustion of a mix of fuels with air under the assumption of no heat loss in a steady process.
+
 **Figure 1:** AFT from a combustion chamber.
 
 ![image](https://github.com/user-attachments/assets/b2c00af6-0b87-471b-9bdf-b8abb648647f)
 
-_Taken from [1], pg 780_
+*Taken from [^1], pg 780*
 
 In simple terms, **adiabatic** means no heat loss to the surroundings. If the combustion inside a chamber is adiabatic, the assumption is there is no heat transfer to the outside of the chamber.
 The main things to consider when calculating the AFT is:
@@ -25,20 +26,23 @@ In a cycle that involves combustion chambers, the AFT can be used along with the
 
 ### How to calculate it?
 The key for calculating AFT is using enthalpy. Considering the combustion chamber as the system, an adiabatic combustion process implies there is no energy loss, for which the enthalpies of the products is equal to the enthalpies of the reactants:
-Figure 2: Energy balance of an adiabatic combustion in a chamber
 
-![image](https://github.com/user-attachments/assets/dbd67560-970f-4bb2-8248-c25c8eb43f84)
+<!--![image](https://github.com/user-attachments/assets/dbd67560-970f-4bb2-8248-c25c8eb43f84)-->
 
-Taken from [1], pg 780
+$$H_{\text{prod}} = H_{\text{react}}$$
 
-In the equations in figure 2, `h°f` is the enthalpy of formation, and `h°` the enthalpy at 298K. `h` is the entalphy at the temperature of the elements before and after the reaction. Consider this entalphy as `hf`. Adapted from [2].
+$$\sum N\_p \left( \overline{h^{\circ}\_f} + \overline{h} - \overline{h^{\circ}} \right)\_p = \sum N_r \left( \overline{h^{\circ}_r} + \overline{h} - \overline{h^{\circ}} \right)_r$$
+
+*Taken from [^1], pg 780*
+
+In the equation above, $\overline{h^{\circ}\_f}$ is the enthalpy of formation, and $\overline{h^{\circ}}$ the enthalpy at 298K. $\overline{h}$ is the enthalpy at the temperature of the elements before and after the reaction. Consider this enthalpy as $\overline{h}\_{flame}$. *Adapted from [^2].*
 
 Therefore, calculating the AFT can be considered in three steps:
-1. Determining the moles of the reactants and products
-2. Obtaining the entalphies for each reactant and product as in figure 2 and solving for `hf`
-3. Linking `hf` to its corresponding temperature, `tf`
+1. Determining the moles of the reactants and products.
+2. Obtaining the enthalpies for each reactant and product from the above equation and solving for $\overline{h}\_{flame}$.
+3. Linking $\overline{h}\_{flame}$ to its corresponding temperature, $T\_{flame}$.
 
-However, step 3 can be particularly challenging since `hf` is different for each product. Therefore, a common technique to calculate it is assuming all products are N2 (since the products will be mostly N2), solving for `hf`, and interpolating from there.
+However, step 3 can be particularly challenging since $\overline{h}\_{flame}$ is different for each product. Therefore, a common technique to calculate it is assuming all products are N2 (since the products will be mostly N2), solving for $\overline{h}\_{flame}$, and interpolating from there.
 
 This process is rather tedious and timetaking, but necessary for critical applications. In an attempt to simplify the calculation process, this code provides a function to calculate the AFT: flametemp()
 
@@ -116,8 +120,7 @@ disp("Precise AFT: " + tflame)
 These options are both deactivated (false) by default.
 
 ### Credits
-Adapted from:
-1. Cengel, Y. (2015). _Thermodynamics: An Engineering Approach._ McGraw Hill: 8th Ed. 
-2. Robayo, D (2024). _Termoquímica de la Combustion_ (Lecture Notes). Universidad de La Sabana.
+[^1]: Cengel, Y. (2015). _Thermodynamics: An Engineering Approach._ McGraw Hill: 8th Ed. 
+[^2]: Robayo, D (2024). _Termoquímica de la Combustion_ (Lecture Notes). Universidad de La Sabana.
 
-Written by Jorge Porras (2025)
+<!--Written by Jorge Porras (2025)-->
